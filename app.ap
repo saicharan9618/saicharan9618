@@ -1,16 +1,13 @@
-## Hi there 👋
-
-<!--
-**saicharan9618/saicharan9618** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+from flask import Flask, render_template, request
+app = Flask(__name__, template_folder=".")
+@app.route('/', methods=['GET', 'POST'])
+def index():
+success_message = None
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        phone = request.form.get('phone')
+success_message = f"Thank you for registering, {name}!"
+    return render_template('index.html', success=success_message)
+if __name__ == '__main__':
+app.run(host='0.0.0.0', port=5000)
